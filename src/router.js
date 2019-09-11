@@ -2,41 +2,65 @@
 
 import Vue from 'vue'
 import Router from 'vue-router'
-import Auth from '@/components/pages/Auth'
-import Home from '@/components/pages/Home'
+
 import Welcome from '@/components/pages/Welcome'
-import Signup_guest from '@/components/pages/Signup_guest'
-import Signup_host from '@/components/pages/Signup_host'
+import Login from '@/components/pages/Login'
+
+import HomeGuest from '@/components/pages/HomeGuest'
+import SignupGuest from '@/components/pages/SignupGuest'
+import InfoGuest from '@/components/pages/InfoGuest'
+
+import HomeHost from '@/components/pages/HomeHost'
+import SignupHost from '@/components/pages/SignupHost'
+import InfoHost from '@/components/pages/InfoHost'
 
 Vue.use(Router)
 
 export default new Router({
   mode: 'history',
   routes: [
+    // 共通
     {
       path: '/',
-      name: 'welcome',
+      name: 'Welcome',
       component: Welcome
     },
     {
-      path: '/home',
-      name: 'home',
-      component: Home
+      path: '/login',
+      name: 'Login',
+      component: Login
+    },
+    // ゲスト
+    {
+      path: '/guest/home',
+      name: 'HomeGuest',
+      component: HomeGuest
     },
     {
-      path: '/auth',
-      name: 'Auth',
-      component: Auth,
+      path: '/guest/signup',
+      name: 'SignupGuest',
+      component: SignupGuest,
     },
     {
-      path: '/signup_guest',
-      name: 'Signup_guest',
-      component: Signup_guest,
+      path: '/guest/info',
+      name: 'InfoGuest',
+      component: InfoGuest,
+    },
+    // ホスト
+    {
+      path: '/host/home',
+      name: 'HomeHost',
+      component: HomeHost
     },
     {
-      path: '/signup_host',
-      name: 'Signup_host',
-      component: Signup_host,
+      path: '/host/signup',
+      name: 'SignupHost',
+      component: SignupHost
+    },
+    {
+      path: '/host/info',
+      name: 'InfoHost',
+      component: InfoHost
     }
   ]
 })

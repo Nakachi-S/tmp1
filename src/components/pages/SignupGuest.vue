@@ -4,7 +4,7 @@
             <v-flex xs12 sm8 lg4 md5>
                 <v-card class="login-card">
                     <v-card-title>
-                    <span class="headline">Signup to Smart-Inn (Host)</span>
+                    <span class="headline">Signup to Smart-Inn (Guest)</span>
                     </v-card-title>
 
                     <v-card-text>
@@ -63,7 +63,7 @@
 <script>
 
 export default {
-  name: 'Signup_host',
+  name: 'SignupGuest',
   data: () => ({
     credentials: {},
     valid: true,
@@ -78,9 +78,10 @@ export default {
   }),
   methods: {
     submit () {
-      this.$request.auth.signup_host(this.credentials.email, this.credentials.password).then(res => {
+      this.$request.auth.signup_guest(this.credentials.email, this.credentials.password).then(res => {
         console.log(res)
-        // console.log(this.$request.defaults.headers.common['Authorization'])
+        // this.$request.defaults.headers.common['Authorization'] = `JWT ${res.data.token}`
+        // this.$router.push('/auth')
       }, err => {
         this.nonFieldErrors = err.response.data.nonFieldErrors
         console.log(err)

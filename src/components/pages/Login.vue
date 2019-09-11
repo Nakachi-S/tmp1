@@ -4,7 +4,7 @@
             <v-flex xs12 sm8 lg4 md5>
                 <v-card class="login-card">
                     <v-card-title>
-                    <span class="headline">Signup to Smart-Inn (Guest)</span>
+                    <span class="headline">Login to Smart-Inn</span>
                     </v-card-title>
 
                     <v-card-text>
@@ -45,7 +45,7 @@
                         />
 
                         </v-container>
-                        <v-btn class="pink white--text" :disabled="!valid" @click="submit">登録</v-btn>
+                        <v-btn class="pink white--text" :disabled="!valid" @click="login">Login</v-btn>
 
                     </v-form>
 
@@ -63,7 +63,7 @@
 <script>
 
 export default {
-  name: 'Sigunup_guest',
+  name: 'Login',
   data: () => ({
     credentials: {},
     valid: true,
@@ -77,11 +77,12 @@ export default {
     ]
   }),
   methods: {
-    submit () {
-      this.$request.auth.signup_guest(this.credentials.email, this.credentials.password).then(res => {
-        console.log(res)
-        // this.$request.defaults.headers.common['Authorization'] = `JWT ${res.data.token}`
-        // this.$router.push('/auth')
+    login () {
+      this.$request.auth.login(this.credentials.email, this.credentials.password).then(res => {
+        console.log(res.data)
+        this.$request.defaults.headers.common['Authorization'] = `JWT ${res.data.token}`
+        this.$router.push('guest/home/')
+        console.log(this.$request.defaults.headers.common['Authorization'])
       }, err => {
         this.nonFieldErrors = err.response.data.nonFieldErrors
         console.log(err)

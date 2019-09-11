@@ -4,7 +4,7 @@
             <v-flex xs12 sm8 lg4 md5>
                 <v-card class="login-card">
                     <v-card-title>
-                    <span class="headline">Login to Smart-Inn</span>
+                    <span class="headline">Signup to Smart-Inn (Host)</span>
                     </v-card-title>
 
                     <v-card-text>
@@ -45,7 +45,7 @@
                         />
 
                         </v-container>
-                        <v-btn class="pink white--text" :disabled="!valid" @click="login">Login</v-btn>
+                        <v-btn class="pink white--text" :disabled="!valid" @click="submit">登録</v-btn>
 
                     </v-form>
 
@@ -63,7 +63,7 @@
 <script>
 
 export default {
-  name: 'Auth',
+  name: 'SignupHost',
   data: () => ({
     credentials: {},
     valid: true,
@@ -77,12 +77,10 @@ export default {
     ]
   }),
   methods: {
-    login () {
-      this.$request.auth.login(this.credentials.email, this.credentials.password).then(res => {
-        console.log(res.data)
-        this.$request.defaults.headers.common['Authorization'] = `JWT ${res.data.token}`
-        this.$router.push('/home')
-        console.log(this.$request.defaults.headers.common['Authorization'])
+    submit () {
+      this.$request.auth.signup_host(this.credentials.email, this.credentials.password).then(res => {
+        console.log(res)
+        // console.log(this.$request.defaults.headers.common['Authorization'])
       }, err => {
         this.nonFieldErrors = err.response.data.nonFieldErrors
         console.log(err)

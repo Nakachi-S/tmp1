@@ -11,7 +11,7 @@
             </v-flex>
             <v-flex xs12 sm8 lg4 md5>
               <v-card class='login-card'>
-                <a href='/auth'>ログインはこちら</a>
+                <a href='/login'>ログインはこちら</a>
               </v-card>
             </v-flex>
             <v-flex xs12 sm8 lg4 md5>
@@ -33,7 +33,7 @@ export default {
   name: 'Welcome',
   methods: {
     checkLoggedIn () {
-      this.$router.push('/auth')
+      this.$router.push('/login')
     }
   }
 }
