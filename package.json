@@ -29,7 +29,8 @@
     "vuetify": "^2.0.10",
     "vuex": "^3.0.0",
     "chalk": "^2.0.1",
-    "shelljs": "^0.7.6"
+    "shelljs": "^0.7.6",
+    "ora": "^1.2.0"
   },
   "devDependencies": {
     "autoprefixer": "^7.1.2",
