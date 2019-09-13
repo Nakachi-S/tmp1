@@ -1,10 +1,5 @@
 <template>
-<template id="main">
   <v-ons-page>
-    <v-ons-toolbar>
-      <div class="center">{{ title }}</div>
-    </v-ons-toolbar>
-
     <v-ons-tabbar swipeable position="auto"
       :tabs="tabs"
       :visible="true"
@@ -14,52 +9,13 @@
   </v-ons-page>
 </template>
 
-<template id="home">
-  <v-ons-page>
-    <p style="text-align: center">
-      Welcome home.<br><br>{{ myProp }}
-    </p>
-  </v-ons-page>
-</template>
-
-<template id="news">
-  <v-ons-page>
-    <p style="text-align: center">
-      Some news here.
-    </p>
-  </v-ons-page>
-</template>
-
-<template id="settings">
-  <v-ons-page>
-    <p style="text-align: center">
-      Change the settings.
-    </p>
-  </v-ons-page>
-</template>
-
-<div id="container"></div>
-</template>
 
 <script>
 /* eslint-disable */
-import router from '../../router'
-
-const homePage = {
-  template: '#home',
-  props: ['myProp']
-};
-
-const newsPage = {
-  template: '#news'
-};
-
-const settingsPage = {
-  template: '#settings'
-};
+import Home from '../parts/Home'
+import Map from '../parts/Map'
 
 export default {
-  el: '#container',
   name: 'HomeGuest',
   template: '#main',
   data() {
@@ -67,30 +23,21 @@ export default {
       activeIndex: 0,
       tabs: [
         {
-          icon: this.md() ? null : 'ion-home',
+          // icon: this.md() ? null : 'ion-home',
+          icon: 'ion-home',
           label: 'Home',
-          page: homePage,
-          props: {
-            myProp: 'This is a page prop!'
-          },
-          key: "homePage"
+          page: Home,
         },
         {
-          icon: this.md() ? null : 'ion-ios-bell',
-          label: 'News',
-          page: newsPage,
-          badge: 7,
-          key: "newsPage"
+          // icon: this.md() ? null : 'ion-ios-bell',
+          icon: 'ion-ios-bell',
+          label: 'Map',
+          page: Map,
         },
-        {
-          icon: this.md() ? null : 'ion-ios-settings',
-          label: 'Settings',
-          page: settingsPage,
-          key: "settingsPage"
-        }
       ]
     };
   },
+  components: {Home, Map},
   mounted () {
     this.checkLoggedIn()
   },
@@ -100,7 +47,7 @@ export default {
     },
     checkLoggedIn () {
       if (!this.$request.defaults.headers.common['Authorization']) {
-        router.push('/login')
+        this.$router.push('/login')
       }
     }
   },
