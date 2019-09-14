@@ -6,7 +6,7 @@
   "private": true,
   "scripts": {
     "dev": "webpack-dev-server --inline --progress --config build/webpack.dev.conf.js",
-    "start": "node ./index.js",
+    "start": "npu run dev",
     "build": "node build/build.js",
     "build:watch": "cross-env WEBPACK_WATCH=true node build/build.js",
     "monaca:preview": "npm run dev & npm run build:watch",
