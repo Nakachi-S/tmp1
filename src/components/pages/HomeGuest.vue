@@ -1,6 +1,12 @@
 <template>
   <v-ons-page>
-    <v-ons-tabbar swipeable position="auto"
+    <v-ons-toolbar>
+      <div class="center">Smart-Inn</div>
+      <div class="right">
+        <v-ons-toolbar-button icon="ion-navicon, material: md-menu"></v-ons-toolbar-button>
+      </div>
+    </v-ons-toolbar>
+    <v-ons-tabbar swipeable:="false" position="bottom"
       :tabs="tabs"
       :visible="true"
       :index.sync="activeIndex"
@@ -17,20 +23,19 @@ import Map from '../parts/Map'
 
 export default {
   name: 'HomeGuest',
-  template: '#main',
   data() {
     return {
       activeIndex: 0,
       tabs: [
         {
-          // icon: this.md() ? null : 'ion-home',
-          icon: 'ion-home',
+          icon: this.md() ? null : 'ion-home',
+          icon: 'home',
           label: 'Home',
           page: Home,
         },
         {
-          // icon: this.md() ? null : 'ion-ios-bell',
-          icon: 'ion-ios-bell',
+          icon: this.md() ? null : 'ion-ios-bell',
+          icon: 'map',
           label: 'Map',
           page: Map,
         },

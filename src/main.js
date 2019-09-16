@@ -12,7 +12,7 @@ import Vuetify from 'vuetify'
 import 'vuetify/dist/vuetify.min.css'
 import api from './api'  // <---追加
 
-Vue.config.productionTip = false
+Vue.config.productionTip = true
 
 Vue.use(VueOnsen)
 Vue.use(Vuetify)
