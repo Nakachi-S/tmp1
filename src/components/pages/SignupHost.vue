@@ -1,63 +1,66 @@
 <template>
+<v-app id='app'>
+  <v-app-bar app :flat="true" color="light-blue" dark>
+        <!--<v-spacer></v-spacer>-->
+      <v-toolbar-title>Smart-Inn</v-toolbar-title>
+  </v-app-bar>
+  <v-content>
     <v-container grid-list-md>
-        <v-layout row wrap align-center justify-center fill-height>
-            <v-flex xs12 sm8 lg4 md5>
-                <v-card class="login-card">
-                    <v-card-title>
-                    <span class="headline">Signup to Smart-Inn (Host)</span>
-                    </v-card-title>
+      <v-layout row wrap align-center justify-center fill-height>
+        <v-flex xs12 sm6 lg6 md5>
+          <v-card class="login-card">
+            <v-card-title>
+              <span class="headline">新規登録（ホスト）</span>
+            </v-card-title>
+            <v-card-text>
+              <v-layout
+                row
+                fill-height
+                justify-center
+                align-center
+                v-if="loading"
+              >
+                <v-progress-circular
+                  :size="50"
+                  color="primary"
+                  indeterminate
+                />
+              </v-layout>
+                <v-form v-else ref="form" v-model="valid" lazy-validation>
+                  <v-container>
+                    <v-text-field
+                      v-model="credentials.email"
+                      :counter="70"
+                      label="Eメールアドレス"
+                      maxlength="70"
+                      required
+                    />
 
-                    <v-card-text>
-
-                    <v-layout
-                        row
-                        fill-height
-                        justify-center
-                        align-center
-                        v-if="loading"
-                    >
-                        <v-progress-circular
-                        :size="50"
-                        color="primary"
-                        indeterminate
-                        />
-                    </v-layout>
-
-
-                    <v-form v-else ref="form" v-model="valid" lazy-validation>
-                        <v-container>
-
-                        <v-text-field
-                            v-model="credentials.email"
-                            :counter="70"
-                            label="Eメールアドレス"
-                            maxlength="70"
-                            required
-                        />
-
-                        <v-text-field
-                            type="password"
-                            v-model="credentials.password"
-                            :counter="20"
-                            label="パスワード"
-                            maxlength="20"
-                            required
-                        />
-
-                        </v-container>
-                        <v-btn class="pink white--text" :disabled="!valid" @click="submit">登録</v-btn>
-
-                    </v-form>
-
-
-                    </v-card-text>
-                </v-card>
-            </v-flex>
-            <v-flex xs12 sm8 md5>
-              <a href='/'>Homeにもどる</a>
-            </v-flex>
-        </v-layout>
+                    <v-text-field
+                      type="password"
+                      v-model="credentials.password"
+                      :counter="20"
+                      label="パスワード"
+                      maxlength="20"
+                      required
+                    />
+                  </v-container>
+                  <v-btn class="light-blue white--text" depressed :disabled="!valid" @click="submit">新規登録</v-btn>
+                </v-form>
+              </v-card-text>
+            </v-card>
+          </v-flex>
+        <v-flex xs12 sm12 md12 text-center>
+          <a href='/'>Homeにもどる</a>
+        </v-flex>
+      </v-layout>
     </v-container>
+  </v-content>
+  <v-footer app color="light-blue">
+      <v-spacer></v-spacer>
+      <span class="white--text">&copy; 2019</span>
+    </v-footer>
+</v-app>
 </template>
 
 <script>

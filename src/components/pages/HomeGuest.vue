@@ -1,15 +1,15 @@
 <template>
-  <v-ons-page>
+  <v-ons-page class="tmp" app>
     <v-ons-toolbar>
       <div class="center">Smart-Inn</div>
-      <div class="right">
+      <!--<div class="right">
         <v-ons-toolbar-button icon="ion-navicon, material: md-menu"></v-ons-toolbar-button>
-      </div>
+      </div>-->
     </v-ons-toolbar>
     <v-ons-tabbar swipeable:="false" position="bottom"
       :tabs="tabs"
       :visible="true"
-      :index.sync="activeIndex"
+      :index.sync="tabbarIndex"
     >
     </v-ons-tabbar>
   </v-ons-page>
@@ -28,13 +28,11 @@ export default {
       activeIndex: 0,
       tabs: [
         {
-          icon: this.md() ? null : 'ion-home',
           icon: 'home',
           label: 'Home',
           page: Home,
         },
         {
-          icon: this.md() ? null : 'ion-ios-bell',
           icon: 'map',
           label: 'Map',
           page: Map,
@@ -63,3 +61,8 @@ export default {
   }
 };
 </script>
+<style>
+.tmp{
+  height:100%;
+}
+</style>
