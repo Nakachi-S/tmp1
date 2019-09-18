@@ -1,65 +1,61 @@
 <template>
   <v-ons-page>
-    <v-ons-toolbar>
-      <div class="center">Smart-Inn</div>
-    </v-ons-toolbar>
-    <v-ons-tabbar swipeable:="false" position="bottom"
-      :tabs="tabs"
-      :visible="true"
-      :index.sync="tabbarIndex"
-    >
-    </v-ons-tabbar>
+    <p class="error">{{ error }}</p>
+    <p class="decode-result">Last result: <b>{{ content }}</b></p>
+    <div class="qrReader">
+      <qrcode-stream :paused="paused" @init="onInit" @decode="onDecode"></qrcode-stream>
+    </div>
   </v-ons-page>
 </template>
 
-
 <script>
 /* eslint-disable */
-import Home from '../parts/Home'
-import Map from '../parts/Map'
-
+import { QrcodeStream } from 'vue-qrcode-reader'
 export default {
-  name: 'HomeGuest',
-  data() {
+  components: { QrcodeStream },
+  name: "Qr",
+  data () {
     return {
-      activeIndex: 0,
-      tabs: [
-        {
-          icon: 'home',
-          label: 'Home',
-          page: Home,
-        },
-        {
-          icon: 'map',
-          label: 'Map',
-          page: Map,
-        },
-      ]
-    };
-  },
-  components: {Home, Map},
-  mounted () {
-    this.checkLoggedIn()
+      paused: false,
+      content: '',
+      error: ''
+    }
   },
   methods: {
-    md() {
-      return this.$ons.platform.isAndroid();
-    },
-    checkLoggedIn () {
-      if (!this.$request.defaults.headers.common['Authorization']) {
-        this.$router.push('/login')
+    async onInit (promise) {
+      // show loading indicator
+      try {
+        await promise
+        // successfully initialized
+      } catch (error) {
+        if (error.name === 'NotAllowedError') {
+          // user denied camera access permisson
+        } else if (error.name === 'NotFoundError') {
+          // no suitable camera device installed
+        } else if (error.name === 'NotSupportedError') {
+          // page is not served over HTTPS (or localhost)
+        } else if (error.name === 'NotReadableError') {
+          // maybe camera is already in use
+        } else if (error.name === 'OverconstrainedError') {
+          // passed constraints don't match any camera. Did you requested the front camera although there is none?
+        } else {
+          // browser is probably lacking features (WebRTC, Canvas)
+        }
+      } finally {
+        // hide loading indicator
       }
+    },
+    onDecode(content){
+      console.log('hi')
+      this.paused = true
+      alert(content)
     }
   },
-  computed: {
-    title() {
-      return this.tabs[this.activeIndex].label;
-    }
-  }
-};
+}
 </script>
 <style>
-.tmp{
-  height:100%;
+.qrReader { 
+  height: 70%;
+  border-style: solid;
 }
 </style>

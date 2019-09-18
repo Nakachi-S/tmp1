@@ -1,15 +1,11 @@
 <template>
   <v-ons-page>
-    <p class="error">{{ error }}</p>
-    <p class="decode-result">Last result: <b>{{ content }}</b></p>
-    <div class="qrReader">
-      <qrcode-stream :paused="paused" @init="onInit" @decode="onDecode"></qrcode-stream>
-    </div>
+    ようこそ！！！
     <v-ons-fab
       position="bottom center"
       :visible="true"
       :ripple="true"
-      @click = "tmp"
+      @click = "pushPage"
     >
       <v-ons-icon icon="camera"></v-ons-icon>
     </v-ons-fab>
@@ -18,55 +14,22 @@
 
 <script>
 /* eslint-disable */
-import { QrcodeStream } from 'vue-qrcode-reader'
+import Qr from '../pages/Qr'
 export default {
-  components: { QrcodeStream },
   name: "Home",
+  key: "HomeMaster",
   data () {
     return {
-      paused: false,
-      content: '',
-      error: ''
     }
   },
   methods: {
-    tmp(){
-      console.log('hlle')
+    pushPage(e) {
+      this.$emit('push-page', {page: Qr});
+      // console.log('hello')
     },
-    async onInit (promise) {
-      // show loading indicator
-      try {
-        await promise
-        // successfully initialized
-      } catch (error) {
-        if (error.name === 'NotAllowedError') {
-          // user denied camera access permisson
-        } else if (error.name === 'NotFoundError') {
-          // no suitable camera device installed
-        } else if (error.name === 'NotSupportedError') {
-          // page is not served over HTTPS (or localhost)
-        } else if (error.name === 'NotReadableError') {
-          // maybe camera is already in use
-        } else if (error.name === 'OverconstrainedError') {
-          // passed constraints don't match any camera. Did you requested the front camera although there is none?
-        } else {
-          // browser is probably lacking features (WebRTC, Canvas)
-        }
-      } finally {
-        // hide loading indicator
-      }
-    },
-    onDecode(content){
-      console.log('hi')
-      this.paused = true
-      alert(content)
-    }
   },
 }
 </script>
 <style>
-.qrReader { 
-  height: 70%;
-  border-style: solid;
-}
+
 </style>
