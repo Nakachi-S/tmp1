@@ -9,6 +9,7 @@
       position="bottom center"
       :visible="true"
       :ripple="true"
+      @click = "tmp"
     >
       <v-ons-icon icon="camera"></v-ons-icon>
     </v-ons-fab>
@@ -29,6 +30,9 @@ export default {
     }
   },
   methods: {
+    tmp(){
+      console.log('hlle')
+    },
     async onInit (promise) {
       // show loading indicator
       try {

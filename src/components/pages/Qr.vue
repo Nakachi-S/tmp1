@@ -2,9 +2,6 @@
   <v-ons-page>
     <v-ons-toolbar>
       <div class="center">Smart-Inn</div>
-      <!--<div class="right">
-        <v-ons-toolbar-button icon="ion-navicon, material: md-menu"></v-ons-toolbar-button>
-      </div>-->
     </v-ons-toolbar>
     <v-ons-tabbar swipeable:="false" position="bottom"
       :tabs="tabs"
