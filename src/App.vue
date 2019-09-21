@@ -3,9 +3,16 @@
 </template>
 
 <script>
+import {mapActions} from 'vuex'  // 追加
 
 export default {
-  name: 'App'
+  name: 'App',
+  created () {  // イベント登録
+    this.tryLoggedIn()
+  },
+  methods: {
+    ...mapActions(['login', 'logout', 'tryLoggedIn'])  // 'tryLoggedIn' 追加
+  }
 }
 </script>
 

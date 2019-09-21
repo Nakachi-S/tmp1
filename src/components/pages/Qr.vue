@@ -55,7 +55,6 @@ export default {
 </script>
 <style>
 .qrReader { 
-  height: 70%;
-  border-style: solid;
+  height: 100%;
 }
 </style>

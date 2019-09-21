@@ -1,6 +1,7 @@
 <template>
   <v-ons-navigator swipeable
     :page-stack="pageStack"
+    animation = 'lift'
     @push-page="pushPage"
     @pop-page="popPage"
   ></v-ons-navigator>

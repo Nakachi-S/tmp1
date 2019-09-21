@@ -45,7 +45,7 @@
                       required
                     />
                   </v-container>
-                  <v-btn class="light-blue white--text" depressed :disabled="!valid" @click="login">ログイン</v-btn>
+                  <v-btn class="light-blue white--text" depressed :disabled="!valid" @click="submit">ログイン</v-btn>
                 </v-form>
               </v-card-text>
             </v-card>
@@ -64,6 +64,7 @@
 </template>
 
 <script>
+import {mapActions} from 'vuex'  // 追加
 
 export default {
   name: 'Login',
@@ -80,16 +81,26 @@ export default {
     ]
   }),
   methods: {
-    login () {
-      this.$request.auth.login(this.credentials.email, this.credentials.password).then(res => {
-        console.log(res.data)
-        this.$request.defaults.headers.common['Authorization'] = `JWT ${res.data.token}`
-        this.$router.push('guest/home/')
-        console.log(this.$request.defaults.headers.common['Authorization'])
+    ...mapActions(['login']),
+
+    submit () {
+      // vuex版
+      this.nonFieldErrors = []
+      this.login([this.credentials.email, this.credentials.password]).then(res => {
+        this.$router.push('guest/home')
       }, err => {
         this.nonFieldErrors = err.response.data.nonFieldErrors
-        console.log(err)
       })
+
+      // this.$request.auth.login(this.credentials.email, this.credentials.password).then(res => {
+      //   console.log(res.data)
+      //   this.$request.defaults.headers.common['Authorization'] = `JWT ${res.data.token}`
+      //   this.$router.push('guest/home/')
+      //   console.log(this.$request.defaults.headers.common['Authorization'])
+      // }, err => {
+      //   this.nonFieldErrors = err.response.data.nonFieldErrors
+      //   console.log(err)
+      // })
     }
   }
 }

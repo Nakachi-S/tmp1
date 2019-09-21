@@ -1,6 +1,14 @@
 <template>
   <v-ons-page>
-    ようこそ！！！
+    <v-ons-card>
+      <div class="title">
+        <span class='marker'>チェックイン</span>
+      </div>
+      <div class="content">
+        カメラアイコンをタップして、<br>
+        カメラを起動させてください
+      </div>
+    </v-ons-card>
     <v-ons-fab
       position="bottom center"
       :visible="true"
@@ -31,5 +39,7 @@ export default {
 }
 </script>
 <style>
-
+.marker {
+  border-bottom: solid 3px #03A9F4;
+}
 </style>

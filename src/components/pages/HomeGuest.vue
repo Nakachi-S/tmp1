@@ -120,7 +120,5 @@ export default {
 };
 </script>
 <style>
-.tmp{
-  height:100%;
-}
+
 </style>
