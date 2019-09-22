@@ -5,6 +5,13 @@
     <div class="qrReader">
       <qrcode-stream :paused="paused" @init="onInit" @decode="onDecode"></qrcode-stream>
     </div>
+    <v-ons-modal :visible="modalVisible" @click="modalVisible = false">
+      <p style="text-align: center">
+        しばらくお待ちください <v-ons-icon icon="fa-spinner" spin></v-ons-icon>
+        <br><br>
+        チェックイン情報を取得しています
+      </p>
+    </v-ons-modal>
   </v-ons-page>
 </template>
 
@@ -16,9 +23,13 @@ export default {
   name: "Qr",
   data () {
     return {
+      //qr関連
       paused: false,
       content: '',
-      error: ''
+      error: '',
+      //modal関連
+      modalVisible: false,
+      timeoutID: 0
     }
   },
   methods: {
@@ -46,9 +57,11 @@ export default {
       }
     },
     onDecode(content){
-      console.log('hi')
       this.paused = true
-      alert(content)
+      this.modalVisible = true
+      clearTimeout(this.timeoutID)
+      this.timeoutID = setTimeout(() => this.modalVisible = false, 2000)
+      // 以下にAPIの追加
     }
   },
 }
